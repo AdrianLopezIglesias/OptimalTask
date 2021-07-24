@@ -1,0 +1,41 @@
+Game
+    CreateDeck
+    CreatePlayer
+    CreateHand
+    MainDeck
+        ->shuffle
+        ->dealHand
+        ->dealTableDeck
+    Turns
+        1
+    New Game
+        Shuffle MainDeck
+        Deal Hand
+        Deal TableDeck
+        Turns (1 to 6)
+Score 
+    Stair: 1 to 12
+    TypeDivergence
+        Prom
+        Count
+        Score
+    SmallerStack
+    Final Score
+    Winner
+Player
+    PlayCard
+        SameNumber
+        SameType
+        FollowingNumber
+        PreviousNumber
+        Sum15
+    Score
+Card
+    Type
+    Number
+Table
+    Has 8 TableDecks
+TableDeck[{}]
+
+Hand[{}]
+Stack[{}]
