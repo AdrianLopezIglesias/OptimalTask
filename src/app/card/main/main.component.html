@@ -40,6 +40,13 @@ Sub-tareas
     <a>child[2].name</a>
   </li>
   <li>
-    <a>Nueva sub-tarea</a>
+    <a class="btn btn-secondary" 
+      routerLink="/task/new"
+      [queryParams]="{
+        father: task.id
+        }"
+    >Nueva tarea</a>
   </li>
 </ul>
+
+<a (click)="delete()">Eliminar tarea</a>

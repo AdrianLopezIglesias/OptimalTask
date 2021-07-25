@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import {getUniqueId} from '../../helpers/idGenerator';
+import { ActivatedRoute, Router } from '@angular/router';
 import { TasksService } from '../../services/tasks.service';
 import { Task } from '../task';
-import {AngularFireDatabase } from 'angularfire2/database';
+import { Observable } from 'rxjs';
+import { combineLatest } from 'rxjs/index';
 @Component({
   selector: 'card-main',
   templateUrl: './main.component.html',
@@ -13,25 +13,33 @@ export class MainComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private t: TasksService
   ) {
   }
   
   taskId: any; 
   task: Task;
+  father: string; 
+  childs = this.t.filteredIndex(this.taskId);
 
   ngOnInit(): void {
-    this.route.paramMap
-      .subscribe(params => {
-        this.taskId = +params.get('id');
-        if(this.taskId != "new"){
-          this.task = this.t.get(this.taskId);
-        }else{
-          this.task = new Task(getUniqueId(1), "", "", 0, 0 ); 
-        }
+    combineLatest([
+      this.route.paramMap,
+      this.route.queryParamMap
+    ]).subscribe(combined => {
+        this.taskId = combined[0].get('id');
+        this.father = combined[1].get('father');
 
-      });
+        if(this.taskId == "new"){
+          this.task = this.t.new(this.father);
+        }else{
+          this.task = this.t.get(this.taskId);
+        }
+    });
+    
   }
+
 
   save(){
     this.t.save(this.task); 
@@ -43,6 +51,14 @@ export class MainComponent implements OnInit {
 
   log(task){
     console.log(task)
+  }
+
+  delete(){
+    if(confirm('¿Seguro que desea eliminar esta tarea?')){
+      this.t.delete(this.taskId);
+      this.router.navigate(['/']);
+    }
+    
   }
 
 

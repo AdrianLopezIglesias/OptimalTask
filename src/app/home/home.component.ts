@@ -12,7 +12,7 @@ export class HomeComponent implements OnInit {
 
   tasks;
   ngOnInit(): void {
-    this.tasks = this.t.index(); 
+    this.tasks = this.t.filteredIndex(""); 
   }
 
 }

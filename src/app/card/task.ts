@@ -5,6 +5,7 @@ export class Task {
     public name: string,
     public description: string,
     public avance: number,
+    public father: "",
     public importante?: number,
     public due?: Date
   ) {  }
