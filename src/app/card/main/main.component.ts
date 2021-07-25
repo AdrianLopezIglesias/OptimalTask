@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Task } from '../task'
 
 @Component({
   selector: 'card-main',
@@ -9,8 +10,17 @@ import { ActivatedRoute } from '@angular/router';
 export class MainComponent implements OnInit {
 
   constructor(private route: ActivatedRoute) { }
-
+  task = {
+    name: '',
+    description: '',
+    avance: 0,
+    father: '',
+    importance: 0,
+    due: 'dd/mm/yyyy'
+  }
   taskId = "";
+  taskName ="";
+  
 
   ngOnInit(): void {
     this.route.paramMap
@@ -18,5 +28,6 @@ export class MainComponent implements OnInit {
         this.taskId = params.get('id')
       });
   }
+
 
 }
