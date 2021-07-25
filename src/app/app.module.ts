@@ -6,6 +6,11 @@ import { AppComponent } from './app.component';
 import { MainComponent } from './card/main/main.component';
 import { HomeComponent } from './home/home.component';
 
+import {AngularFireModule} from 'angularfire2';
+import {AngularFireDatabaseModule} from 'angularfire2/database';
+import { environment } from 'src/environments/environment';
+import { TasksService } from './services/tasks.service';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -15,9 +20,13 @@ import { HomeComponent } from './home/home.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireDatabaseModule
   ],
-  providers: [],
+  providers: [
+    TasksService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

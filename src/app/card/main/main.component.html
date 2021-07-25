@@ -2,6 +2,7 @@
 <div class="float-start"><a routerLink="/">Father</a></div>
 <div class="float-end"><a routerLink="/">Home</a></div>
 </div>
+<form>
 <input type="hidden"
   name="taskId"
   value="{{taskId}}"
@@ -11,22 +12,22 @@
     class="form-control"
     type="text" 
     placeholder="Task name" 
+    name="taskName"
+    (keyup)="save()"
     [(ngModel)]="task.name"
     value="{{task.name}}">
 </p>
-<p>
-  <input 
-    class="form-control"
-    type="text" 
-    placeholder="Task name" 
-    ngModel
-    name="taskName"
-    #taskName="ngModel"
-    value="{{task.name}}">
-</p>
-<textarea class="form-control" placeholder="Descripción" rows="6"></textarea>
+<textarea 
+  class="form-control" 
+  placeholder="Descripción" 
+  rows="6"
+  name="taskDescription"
+  (keyup)="save()"
+  [(ngModel)]="task.description"
+  >{{task.namedescription}}</textarea>
 <label for="customRange2" class="form-label">Avance</label>
 <input type="range" class="form-range" min="0" max="5" id="customRange2">
+</form>
 Sub-tareas
 <ul>
   <li>

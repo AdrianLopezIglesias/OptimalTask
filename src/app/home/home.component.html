@@ -1,15 +1,9 @@
-Tareas
+<h2>Tareas</h2>
 <ul>
-  <li>
-    <a routerLink="/task/1">child[0].name</a>
+  <li *ngFor="let task of tasks">
+    <a routerLink="/task/{{task.id}}">{{task.name}}</a>
   </li>
   <li>
-    <a>child[1].name</a>
-  </li>
-  <li>
-    <a>child[2].name</a>
-  </li>
-  <li>
-    <a>Nueva sub-tarea</a>
+    <a routerLink="/task/new">Nueva tarea</a>
   </li>
 </ul>
