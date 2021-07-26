@@ -2,8 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TasksService } from '../../services/tasks.service';
 import { Task } from '../task';
-import { Observable } from 'rxjs';
-import { combineLatest } from 'rxjs/index';
+
+
+import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+
 @Component({
   selector: 'card-main',
   templateUrl: './main.component.html',
@@ -14,10 +16,11 @@ export class MainComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private t: TasksService
+    private t: TasksService,
+    private modalService: NgbModal
   ) {
   }
-  
+  closeResult = '';
   taskId: any; 
   task: Task;
   father: string; 
@@ -62,6 +65,22 @@ export class MainComponent implements OnInit {
     this.router.navigate(['/task/'+newTask.id]);
   }
 
+  open(content) {
+    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
+  }
 
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return `with: ${reason}`;
+    }
+  }
 
 }

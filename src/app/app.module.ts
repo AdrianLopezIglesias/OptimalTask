@@ -6,6 +6,8 @@ import { AppComponent } from './app.component';
 import { MainComponent } from './card/main/main.component';
 import { HomeComponent } from './home/home.component';
 
+import { NgbModule, NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
+
 import { TasksService } from './services/tasks.service';
 
 @NgModule({
@@ -16,8 +18,11 @@ import { TasksService } from './services/tasks.service';
   ],
   imports: [
     BrowserModule,
+    NgbModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    NgbModule,
+    NgbDropdownModule
   ],
   providers: [
     TasksService
