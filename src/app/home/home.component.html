@@ -3,7 +3,11 @@
   <div *ngFor="let task of tasks" class="w-100">
     <a class="btn btn-secondary w-100" routerLink="/task/{{ task.id }}">{{ task.name }}</a>
   </div>
-  <a class="btn btn-secondary" routerLink="/task/new">Nueva tarea</a>
+  <a class="btn btn-secondary" 
+    (click)="newTask()"
+    >
+    Nueva tarea
+  </a>
 
 
 </div>

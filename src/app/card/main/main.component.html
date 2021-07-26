@@ -1,5 +1,7 @@
 <div class="f-dlex flex-row">
-<div class="float-start"><a routerLink="/">Father</a></div>
+<div class="float-start">
+  <a *ngIf="task.father" routerLink="/task/{{task.father}}">{{fatherName}}</a>
+</div>
 <div class="float-end"><a routerLink="/">Home</a></div>
 </div>
 <form>
@@ -29,24 +31,17 @@
 <input type="range" class="form-range" min="0" max="5" id="customRange2">
 </form>
 Sub-tareas
-<ul>
-  <li>
-    <a routerLink="/">child[0].name</a>
-  </li>
-  <li>
-    <a>child[1].name</a>
-  </li>
-  <li>
-    <a>child[2].name</a>
-  </li>
-  <li>
+  <p *ngFor="let child of childs">
     <a class="btn btn-secondary" 
-      routerLink="/task/new"
-      [queryParams]="{
-        father: task.id
-        }"
+      routerLink="/task/{{child.id}}"
+      >{{child.name}}</a>
+  </p>
+  <p>
+    <a class="btn btn-secondary" 
+      (click)="newChild(task.id)"
     >Nueva tarea</a>
-  </li>
-</ul>
+</p>
+<p>
 
 <a (click)="delete()">Eliminar tarea</a>
+</p>

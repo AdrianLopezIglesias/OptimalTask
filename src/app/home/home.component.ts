@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { TasksService } from '../services/tasks.service'
 
 @Component({
@@ -8,11 +9,18 @@ import { TasksService } from '../services/tasks.service'
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private t: TasksService) { }
+  constructor(private t: TasksService,
+  
+    private router: Router) { }
 
   tasks;
   ngOnInit(): void {
     this.tasks = this.t.filteredIndex(""); 
+  }
+
+    newTask(){
+    const newTask = this.t.new();
+    this.router.navigate(['/task/'+newTask.id]);
   }
 
 }

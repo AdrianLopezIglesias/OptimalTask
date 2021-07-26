@@ -29,19 +29,25 @@ export class TasksService {
   }
 
   get(id: string){
-    console.log(id);
     this.tasks = this.index();
     console.log("abriendo tarea existente");
     this.task = this.tasks.find(t => t.id == id );
    
     return this.task; 
   }
+  findByFather(fatherId: string){
+    this.tasks = this.index();
+    this.task = this.tasks.find(t => t.id == fatherId );
+    return this.task; 
+  }
+
   new(father){  
     if(!father){ father = "";}
     const task = new Task(getUniqueId(1), "", "", 0, father, 0 );
     this.tasks = this.index();
     this.tasks.push(task);
     localStorage.setItem('tasks', JSON.stringify(this.tasks));
+    console.log("Creando nueva tarea: ");
     console.log(task);
     return task; 
   }

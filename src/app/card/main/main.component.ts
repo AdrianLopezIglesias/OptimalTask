@@ -21,25 +21,20 @@ export class MainComponent implements OnInit {
   taskId: any; 
   task: Task;
   father: string; 
-  childs = this.t.filteredIndex(this.taskId);
-
+  fatherName ="";
+  childs = [];
+  
   ngOnInit(): void {
-    combineLatest([
-      this.route.paramMap,
-      this.route.queryParamMap
-    ]).subscribe(combined => {
-        this.taskId = combined[0].get('id');
-        this.father = combined[1].get('father');
+    this.route.paramMap.subscribe(x => {
+      this.taskId = x.get('id');
 
-        if(this.taskId == "new"){
-          this.task = this.t.new(this.father);
-        }else{
-          this.task = this.t.get(this.taskId);
-        }
-    });
-    
+      this.task = this.t.get(this.taskId);
+      this.childs = this.t.filteredIndex(this.taskId);
+      if(this.task.father){
+        this.fatherName = this.t.findByFather(this.task.father).name;
+      }
+    })
   }
-
 
   save(){
     this.t.save(this.task); 
@@ -58,8 +53,13 @@ export class MainComponent implements OnInit {
       this.t.delete(this.taskId);
       this.router.navigate(['/']);
     }
-    
   }
+
+  newChild(father){
+    const newTask = this.t.new(father);
+    this.router.navigate(['/task/'+newTask.id]);
+  }
+
 
 
 }
