@@ -9,17 +9,19 @@ import { TasksService } from '../services/tasks.service'
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private t: TasksService,
-  
-    private router: Router) { }
+  constructor(
+    private t: TasksService,
+    private router: Router
+  ) { }
 
   tasks;
   ngOnInit(): void {
     this.tasks = this.t.filteredIndex(""); 
   }
 
-    newTask(){
+  newTask(){
     const newTask = this.t.new("");
+    console.log("aca funciona");
     this.router.navigate(['/task/'+newTask.id]);
   }
 

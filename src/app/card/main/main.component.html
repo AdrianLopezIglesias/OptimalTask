@@ -1,91 +1,78 @@
-<div class="f-dlex flex-row">
-<div class="float-start">
-  <a *ngIf="task.father" routerLink="/task/{{task.father}}">{{fatherName}}</a>
+<div class="row">
+  <div class="col-8">
+    <a *ngIf="!task.father" routerLink="">Home</a>
+    <a *ngIf="task.father" routerLink="/task/{{ task.father }}">{{ fatherName }}</a>
+  </div>
+  <div class="col-4">
+    <div class="float-end">
+
+      <div class="dropdown" ngbDropdown>
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
+          data-bs-toggle="dropdown" aria-expanded="false" ngbDropdownToggle>
+          Opciones
+        </button>
+        <ul class="dropdown-menu" ngbDropdownMenu aria-labelledby="dropdownMenuButton1">
+          <li><a class="dropdown-item" routerLink="/">Home</a></li>
+          <li><a class="dropdown-item" (click)="asginar()">Asignar</a></li>
+          <li><a class="dropdown-item" (click)="open(content)">Asignar</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
 </div>
 
-<div class="float-end">
 
-<div class="dropdown" ngbDropdown >
-  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false"
-  ngbDropdownToggle 
-  >
-    Opciones
-  </button>
-  <ul class="dropdown-menu" ngbDropdownMenu  aria-labelledby="dropdownMenuButton1">
-    <li><a class="dropdown-item" routerLink="/">Home</a></li>
-    <li><a class="dropdown-item" (click)="asginar()">Asignar</a></li>
-  </ul>
-</div>
-</div>
-</div>
+
 <form>
-<input type="hidden"
-  name="taskId"
-  value="{{taskId}}"
->
-<p>
-  <input 
-    class="form-control"
-    type="text" 
-    placeholder="Task name" 
-    name="taskName"
-    (keyup)="save()"
-    [(ngModel)]="task.name"
-    value="{{task.name}}">
-</p>
-<textarea 
-  class="form-control" 
-  placeholder="Descripción" 
-  rows="6"
-  name="taskDescription"
-  (keyup)="save()"
-  [(ngModel)]="task.description"
-  >{{task.description}}</textarea>
-<label for="customRange2" class="form-label">Avance</label>
-<input type="range" class="form-range" min="0" max="5" id="customRange2">
+  <input type="hidden" name="taskId" value="{{ taskId }}">
+  <p>
+    <input class="form-control" type="text" placeholder="Task name" name="taskName" (keyup)="save()"
+      [(ngModel)]="task.name" value="{{ task.name }}">
+  </p>
+  <textarea class="form-control" placeholder="Descripción" rows="6" name="taskDescription" (keyup)="save()"
+    [(ngModel)]="task.description">{{ task.description }}</textarea>
+  <label for="customRange2" class="form-label">Avance</label>
+  <input type="range" class="form-range" min="0" max="5" id="customRange2">
 </form>
+
 
 <h2>Sub-tareas</h2>
 <div class="d-grid gap-2">
   <div *ngFor="let child of childs" class="w-100">
     <a class="btn btn-secondary w-100" routerLink="/task/{{ child.id }}">{{ child.name }}</a>
   </div>
-  <a class="btn btn-secondary" 
-    (click)="newChild(task.id)"
-    >
+  <a class="btn btn-secondary" (click)="newChild(task.id)">
     Nueva tarea
   </a>
 
 
-<a (click)="delete()">Eliminar tarea</a>
+  <a (click)="delete()">Eliminar tarea</a>
 
-<ng-template #content let-modal>
-  <div class="modal-header">
-    <h4 class="modal-title" id="modal-basic-title">Profile update</h4>
-    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-  <div class="modal-body">
-    <form>
-      <div class="form-group">
-        <label for="dateOfBirth">Date of birth</label>
-        <div class="input-group">
-          <input id="dateOfBirth" class="form-control" placeholder="yyyy-mm-dd" name="dp" ngbDatepicker #dp="ngbDatepicker">
-          <div class="input-group-append">
-            <button class="btn btn-outline-secondary calendar" (click)="dp.toggle()" type="button"></button>
+
+  <ng-template #content let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="asignarPadre">Asignar padre a: {{ task.name }}</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form>
+        <div class="form-group">
+          <label for="Búsqueda">Buscar</label>
+          <div class="input-group">
+            <input id="Búsqueda" class="form-control">
           </div>
         </div>
+      </form>
+      <div class="d-grid gap-2">
+        <div *ngFor="let par of posibleParents" class="w-100">
+          <a class="btn btn-secondary w-100" (click)="asignar(par.id)">{{ par.name }}</a>
+        </div>
       </div>
-    </form>
-  </div>
-  <div class="modal-footer">
-    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>
-  </div>
-</ng-template>
+    </div>
 
-<button class="btn btn-lg btn-outline-primary" (click)="open(content)">Launch demo modal</button>
+  </ng-template>
 
-<hr>
 
-<pre>{{ closeResult }}</pre>
+  <hr>

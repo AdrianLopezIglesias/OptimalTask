@@ -26,6 +26,7 @@ export class MainComponent implements OnInit {
   father: string; 
   fatherName ="";
   childs = [];
+  posibleParents = [];
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(x => {
@@ -36,6 +37,7 @@ export class MainComponent implements OnInit {
       if(this.task.father){
         this.fatherName = this.t.findByFather(this.task.father).name;
       }
+      this.posibleParents = this.t.posibleParentsIndex(this.task.id);
     })
   }
 
@@ -65,8 +67,17 @@ export class MainComponent implements OnInit {
     this.router.navigate(['/task/'+newTask.id]);
   }
 
+  asignar(id: never){
+    this.task = this.t.adoptar(id, this.task);
+    this.modalService.dismissAll();
+    console.log(this.task);
+    this.fatherName = this.t.findByFather(this.task.father).name;
+    return this.router.navigate(['/task/'+this.task.id]);
+  }
+
+
   open(content) {
-    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+    this.modalService.open(content, {ariaLabelledBy: 'asignarPadre'}).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;

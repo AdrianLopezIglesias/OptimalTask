@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { textChangeRangeIsUnchanged } from 'typescript';
 import { Task } from '../card/task'
 import {getUniqueId} from '../helpers/idGenerator';
 
@@ -12,7 +13,6 @@ export class TasksService {
   ) { }
   
   tasks = []; 
-  task = new Task("1", 'Mi primer tarea', 'Esta es la descripción de la tarea', 4, "", 1)
 
   index(){
     return JSON.parse(localStorage.getItem('tasks'));
@@ -28,11 +28,15 @@ export class TasksService {
     }
   }
 
+  posibleParentsIndex(id){
+    this.tasks = JSON.parse(localStorage.getItem('tasks'));
+    this.tasks = this.tasks.filter(x => !x.family.includes(id));
+    return this.tasks.filter(x => !x.id.includes(id))
+  }
+
   get(id: string){
     this.tasks = this.index();
-    console.log("abriendo tarea existente");
     this.task = this.tasks.find(t => t.id == id );
-   
     return this.task; 
   }
   findByFather(fatherId: string){
@@ -40,11 +44,21 @@ export class TasksService {
     this.task = this.tasks.find(t => t.id == fatherId );
     return this.task; 
   }
-
   new(father){  
-    if(!father){ father = "";}
-    const task = new Task(getUniqueId(1), "", "", 0, father, 0 );
+    let level = 0; 
+    console.log("aca funciona");
+    if(!father){ father = ""} else {level = this.findByFather(father).level + 1}
+    let family = <any>[];
+
+    if(father) {
+      family = this.findByFather(father).family;
+    } 
+    family.push(father); 
+
+    const task = new Task(getUniqueId(1), "", "", 0, father, level, family, 0 );
+
     this.tasks = this.index();
+    if(!this.tasks){this.tasks = [];}
     this.tasks.push(task);
     localStorage.setItem('tasks', JSON.stringify(this.tasks));
     console.log("Creando nueva tarea: ");
@@ -68,4 +82,27 @@ export class TasksService {
     localStorage.setItem('tasks', JSON.stringify(this.tasks));
   }
 
+  adoptar(id: string, task: Task){
+    const newParent = this.get(id);
+
+    let newFamily = newParent.family;
+    newFamily.push(id);
+
+    task.family = newFamily;
+    task.father = id;
+
+    this.save(task);
+
+    console.log(task);
+    
+    
+    let childs = this.filteredIndex(task.id);
+    let childsFamily = task.family.push(task.id);
+    for (var i = 0; i < childs.length; i+=1) {
+      childs.forEach(child => {
+        this.adoptar(task.id, child);
+      });
+    }
+    return task; 
+  }
 }
