@@ -12,7 +12,7 @@ export class TasksService {
   ) { }
   
   tasks = []; 
-  task = new Task("1", 'Mi primer tarea', 'Esta es la descripción de la tarea', 4, 1)
+  task = new Task("1", 'Mi primer tarea', 'Esta es la descripción de la tarea', 4, "", 1)
 
   index(){
     return JSON.parse(localStorage.getItem('tasks'));

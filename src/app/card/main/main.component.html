@@ -26,22 +26,21 @@
   name="taskDescription"
   (keyup)="save()"
   [(ngModel)]="task.description"
-  >{{task.namedescription}}</textarea>
+  >{{task.description}}</textarea>
 <label for="customRange2" class="form-label">Avance</label>
 <input type="range" class="form-range" min="0" max="5" id="customRange2">
 </form>
-Sub-tareas
-  <p *ngFor="let child of childs">
-    <a class="btn btn-secondary" 
-      routerLink="/task/{{child.id}}"
-      >{{child.name}}</a>
-  </p>
-  <p>
-    <a class="btn btn-secondary" 
-      (click)="newChild(task.id)"
-    >Nueva tarea</a>
-</p>
-<p>
+
+<h2>Sub-tareas</h2>
+<div class="d-grid gap-2">
+  <div *ngFor="let child of childs" class="w-100">
+    <a class="btn btn-secondary w-100" routerLink="/task/{{ child.id }}">{{ child.name }}</a>
+  </div>
+  <a class="btn btn-secondary" 
+    (click)="newChild(task.id)"
+    >
+    Nueva tarea
+  </a>
+
 
 <a (click)="delete()">Eliminar tarea</a>
-</p>

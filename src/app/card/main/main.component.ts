@@ -23,7 +23,7 @@ export class MainComponent implements OnInit {
   father: string; 
   fatherName ="";
   childs = [];
-  
+
   ngOnInit(): void {
     this.route.paramMap.subscribe(x => {
       this.taskId = x.get('id');
@@ -50,7 +50,9 @@ export class MainComponent implements OnInit {
 
   delete(){
     if(confirm('¿Seguro que desea eliminar esta tarea?')){
+      
       this.t.delete(this.taskId);
+      
       this.router.navigate(['/']);
     }
   }

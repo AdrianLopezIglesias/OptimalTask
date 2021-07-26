@@ -19,7 +19,7 @@ export class HomeComponent implements OnInit {
   }
 
     newTask(){
-    const newTask = this.t.new();
+    const newTask = this.t.new("");
     this.router.navigate(['/task/'+newTask.id]);
   }
 
