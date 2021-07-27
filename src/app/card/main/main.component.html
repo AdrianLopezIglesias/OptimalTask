@@ -1,20 +1,21 @@
-<div class="row">
+<div class="row mt-2">
   <div class="col-8">
-    <a *ngIf="!task.father" routerLink="">Home</a>
-    <a *ngIf="task.father" routerLink="/task/{{ task.father }}">{{ fatherName }}</a>
+      <a class="btn btn-outline-secondary w-100 btn-sm" *ngIf="!task.father" routerLink="">Home</a>
+      <a class="btn btn-outline-secondary w-100 btn-sm" *ngIf="task.father" routerLink="/task/{{ task.father }}">{{ fatherName }}</a>
   </div>
   <div class="col-4">
     <div class="float-end">
 
       <div class="dropdown" ngbDropdown>
-        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
+        <button class="btn btn-outline-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton1"
           data-bs-toggle="dropdown" aria-expanded="false" ngbDropdownToggle>
           Opciones
         </button>
         <ul class="dropdown-menu" ngbDropdownMenu aria-labelledby="dropdownMenuButton1">
-          <li><a class="dropdown-item" routerLink="/">Home</a></li>
-          <li><a class="dropdown-item" (click)="asginar()">Asignar</a></li>
+          <li><a class="dropdown-item" routerLink="/">Go Home</a></li>
           <li><a class="dropdown-item" (click)="open(content)">Asignar</a></li>
+          <li><a class="dropdown-item" (click)="delete()">Eliminar tarea</a></li>
+          
         </ul>
       </div>
     </div>
@@ -23,7 +24,7 @@
 
 
 
-<form>
+<form class="mt-2">
   <input type="hidden" name="taskId" value="{{ taskId }}">
   <p>
     <input class="form-control" type="text" placeholder="Task name" name="taskName" (keyup)="save()"
@@ -31,22 +32,23 @@
   </p>
   <textarea class="form-control" placeholder="Descripción" rows="6" name="taskDescription" (keyup)="save()"
     [(ngModel)]="task.description">{{ task.description }}</textarea>
-  <label for="customRange2" class="form-label">Avance</label>
-  <input type="range" class="form-range" min="0" max="5" id="customRange2">
+
+  <label for="customRange2" class="form-label">Avance ({{ task.avance }}/5)</label>
+  <input type="range" class="form-range" min="0" max="5" id="customRange2" (change)="save()" [(ngModel)]="task.avance" name="avance" value="{{ task.avance }}">
+
 </form>
 
 
-<h2>Sub-tareas</h2>
+<p>Sub-tareas</p>
 <div class="d-grid gap-2">
   <div *ngFor="let child of childs" class="w-100">
-    <a class="btn btn-secondary w-100" routerLink="/task/{{ child.id }}">{{ child.name }}</a>
+    <a class="btn btn-outline-secondary w-100 btn-sm" routerLink="/task/{{ child.id }}">{{ child.name }} ({{ child.avance }}/5)</a>
   </div>
-  <a class="btn btn-secondary" (click)="newChild(task.id)">
+  <a class="btn btn-outline-secondary btn-sm" (click)="newChild(task.id)">
     Nueva tarea
   </a>
 
 
-  <a (click)="delete()">Eliminar tarea</a>
 
 
   <ng-template #content let-modal>
@@ -67,7 +69,7 @@
       </form>
       <div class="d-grid gap-2">
         <div *ngFor="let par of posibleParents" class="w-100">
-          <a class="btn btn-secondary w-100" (click)="asignar(par.id)">{{ par.name }}</a>
+          <a class="btn btn-outline-secondary w-100 btn-sm" (click)="asignar(par.id)">{{ par.name }}</a>
         </div>
       </div>
     </div>

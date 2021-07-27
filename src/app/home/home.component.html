@@ -1,11 +1,10 @@
-<h2>Tareas</h2>
 <div class="d-grid gap-2">
 <div *ngIf="tasks">
-  <div  *ngFor="let task of tasks" class="w-100">
-    <a class="btn btn-secondary w-100" routerLink="/task/{{ task.id }}">{{ task.name }}</a>
+  <div  *ngFor="let task of tasks" class="w-100  ">
+    <a class="btn btn-outline-secondary w-100 btn-sm mt-2" routerLink="/task/{{ task.id }}">{{ task.name }}</a>
   </div>
   </div>
-  <a class="btn btn-secondary" 
+  <a class="btn btn-outline-secondary btn-sm " 
     (click)="newTask()"
     >
     Nueva tarea

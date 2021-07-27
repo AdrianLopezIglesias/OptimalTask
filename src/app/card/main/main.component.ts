@@ -94,4 +94,9 @@ export class MainComponent implements OnInit {
     }
   }
 
+  refreshAvance(event: any){
+    console.log(event.target.value);
+    console.log(this.task);
+  }
+
 }
