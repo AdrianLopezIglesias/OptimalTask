@@ -9,12 +9,16 @@ import { HomeComponent } from './home/home.component';
 import { NgbModule, NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { TasksService } from './services/tasks.service';
+import { SliderAvanceStatusComponent } from './card/slider-avance-status/slider-avance-status.component';
+import { ModalEditarAvanceComponent } from './card/modal-editar-avance/modal-editar-avance.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MainComponent,
     HomeComponent,
+    SliderAvanceStatusComponent,
+    ModalEditarAvanceComponent,
   ],
   imports: [
     BrowserModule,
@@ -26,6 +30,9 @@ import { TasksService } from './services/tasks.service';
   ],
   providers: [
     TasksService
+  ],
+  entryComponents: [
+    ModalEditarAvanceComponent
   ],
   bootstrap: [AppComponent]
 })

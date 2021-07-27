@@ -5,7 +5,6 @@
   </div>
   <div class="col-4">
     <div class="float-end">
-
       <div class="dropdown" ngbDropdown>
         <button class="btn btn-outline-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton1"
           data-bs-toggle="dropdown" aria-expanded="false" ngbDropdownToggle>
@@ -14,6 +13,7 @@
         <ul class="dropdown-menu" ngbDropdownMenu aria-labelledby="dropdownMenuButton1">
           <li><a class="dropdown-item" routerLink="/">Go Home</a></li>
           <li><a class="dropdown-item" (click)="open(content)">Asignar</a></li>
+          <li><a class="dropdown-item" (click)="openAvance(content)">Editar Avance</a></li>
           <li><a class="dropdown-item" (click)="delete()">Eliminar tarea</a></li>
           
         </ul>
@@ -33,8 +33,8 @@
   <textarea class="form-control" placeholder="Descripción" rows="6" name="taskDescription" (keyup)="save()"
     [(ngModel)]="task.description">{{ task.description }}</textarea>
 
-  <label for="customRange2" class="form-label">Avance ({{ task.avance }}/5)</label>
-  <input type="range" class="form-range" min="0" max="5" id="customRange2" (change)="save()" [(ngModel)]="task.avance" name="avance" value="{{ task.avance }}">
+  <label for="customRange2" class="form-label">Avance ({{ task.avance.slider.currentValue }}/{{ task.avance.slider.maxValue }})</label>
+  <input type="range" class="form-range" min="0" max="{{ task.avance.slider.maxValue }}" id="customRange2" (change)="save()" [(ngModel)]="task.avance.slider.currentValue" name="avance" value="{{ task.avance.slider.currentValue }}">
 
 </form>
 
@@ -42,39 +42,8 @@
 <p>Sub-tareas</p>
 <div class="d-grid gap-2">
   <div *ngFor="let child of childs" class="w-100">
-    <a class="btn btn-outline-secondary w-100 btn-sm" routerLink="/task/{{ child.id }}">{{ child.name }} ({{ child.avance }}/5)</a>
+    <a class="btn btn-outline-secondary w-100 btn-sm" routerLink="/task/{{ child.id }}">{{ child.name }}     <app-slider-avance-status [task]="child"></app-slider-avance-status></a>
   </div>
   <a class="btn btn-outline-secondary btn-sm" (click)="newChild(task.id)">
     Nueva tarea
   </a>
-
-
-
-
-  <ng-template #content let-modal>
-    <div class="modal-header">
-      <h4 class="modal-title" id="asignarPadre">Asignar padre a: {{ task.name }}</h4>
-      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
-    <div class="modal-body">
-      <form>
-        <div class="form-group">
-          <label for="Búsqueda">Buscar</label>
-          <div class="input-group">
-            <input id="Búsqueda" class="form-control">
-          </div>
-        </div>
-      </form>
-      <div class="d-grid gap-2">
-        <div *ngFor="let par of posibleParents" class="w-100">
-          <a class="btn btn-outline-secondary w-100 btn-sm" (click)="asignar(par.id)">{{ par.name }}</a>
-        </div>
-      </div>
-    </div>
-
-  </ng-template>
-
-
-  <hr>

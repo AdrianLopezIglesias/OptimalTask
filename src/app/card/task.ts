@@ -10,17 +10,26 @@ export class Task {
     public importante?: number,
     public due?: Date
   ) {  }
-
 }
 
 export class Avance {
   constructor(
-    public type: string,
-    public sliderValue: any,
-    public sliderMax: BigInteger,
-    public sliderDanger: BigInteger,
-    public progressCurrent: string,
-    public progressOptions: [],
-
-  ) {}
+    public type = "slider",
+    public slider = {
+    currentValue: 0,
+    maxValue: 10,
+    alarmValue: 5
+},
+    public progress = {
+    currentValue: 0,
+    maxValue: 100,
+},
+    public status = {
+    currentStatus: "",
+    possibleStatus: ['Sin comenzar', 'En progreso', 'Terminada']
 }
+  ) {
+    }
+
+}
+

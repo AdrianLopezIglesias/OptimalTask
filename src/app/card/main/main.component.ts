@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TasksService } from '../../services/tasks.service';
 import { Task } from '../task';
 
 
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+import { ModalEditarAvanceComponent } from '../modal-editar-avance/modal-editar-avance.component';
 
 @Component({
   selector: 'card-main',
@@ -84,6 +85,7 @@ export class MainComponent implements OnInit {
     });
   }
 
+
   private getDismissReason(reason: any): string {
     if (reason === ModalDismissReasons.ESC) {
       return 'by pressing ESC';
@@ -93,7 +95,16 @@ export class MainComponent implements OnInit {
       return `with: ${reason}`;
     }
   }
+  @ViewChild('modalAvance')
+    private modalAvance: ModalEditarAvanceComponent;
 
+  openAvance(content) { 
+    this.modalService.open(ModalEditarAvanceComponent)
+  }
+
+
+ 
+  
   refreshAvance(event: any){
     console.log(event.target.value);
     console.log(this.task);

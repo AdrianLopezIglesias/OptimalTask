@@ -1,7 +1,9 @@
 <div class="d-grid gap-2">
 <div *ngIf="tasks">
   <div  *ngFor="let task of tasks" class="w-100  ">
-    <a class="btn btn-outline-secondary w-100 btn-sm mt-2" routerLink="/task/{{ task.id }}">{{ task.name }}</a>
+    <a class="btn btn-outline-secondary w-100 btn-sm mt-2" routerLink="/task/{{ task.id }}">{{ task.name }} 
+    <app-slider-avance-status [task]="task"></app-slider-avance-status>
+    </a>
   </div>
   </div>
   <a class="btn btn-outline-secondary btn-sm " 

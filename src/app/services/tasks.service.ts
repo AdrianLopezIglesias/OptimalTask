@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { textChangeRangeIsUnchanged } from 'typescript';
-import { Task } from '../card/task'
+import { Avance, Task } from '../card/task'
 import {getUniqueId} from '../helpers/idGenerator';
 
 
@@ -13,6 +13,7 @@ export class TasksService {
   ) { }
   
   tasks = []; 
+  task: Task;
 
   index(){
     return JSON.parse(localStorage.getItem('tasks'));
@@ -55,7 +56,7 @@ export class TasksService {
     } 
     family.push(father); 
 
-    const task = new Task(getUniqueId(1), "", "", 0, father, level, family, 0 );
+    const task = new Task(getUniqueId(1), "", "", new Avance, father, level, family, 0 );
 
     this.tasks = this.index();
     if(!this.tasks){this.tasks = [];}
@@ -82,7 +83,7 @@ export class TasksService {
     localStorage.setItem('tasks', JSON.stringify(this.tasks));
   }
 
-  adoptar(id: string, task: Task){
+  adoptar(id: never, task: Task){
     const newParent = this.get(id);
 
     let newFamily = newParent.family;
