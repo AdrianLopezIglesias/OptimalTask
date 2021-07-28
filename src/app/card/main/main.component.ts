@@ -19,8 +19,8 @@ export class MainComponent implements OnInit {
     private router: Router,
     private t: TasksService,
     private modalService: NgbModal
-  ) {
-  }
+  ) {  }
+
   closeResult = '';
   taskId: any; 
   task: Task;
@@ -56,9 +56,7 @@ export class MainComponent implements OnInit {
 
   delete(){
     if(confirm('¿Seguro que desea eliminar esta tarea?')){
-      
       this.t.delete(this.taskId);
-      
       this.router.navigate(['/']);
     }
   }
@@ -95,12 +93,10 @@ export class MainComponent implements OnInit {
       return `with: ${reason}`;
     }
   }
-  @ViewChild('modalAvance')
-    private modalAvance: ModalEditarAvanceComponent;
 
   openAvance(content) { 
     const modal = this.modalService.open(ModalEditarAvanceComponent);
-    modal.componentInstance.texto = "123";
+    modal.componentInstance.task = this.task;
   }
 
 

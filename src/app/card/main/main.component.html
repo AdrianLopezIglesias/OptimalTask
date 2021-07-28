@@ -1,21 +1,28 @@
 <div class="row mt-2">
   <div class="col-8">
       <a class="btn btn-outline-secondary w-100 btn-sm" *ngIf="!task.father" routerLink="">Home</a>
-      <a class="btn btn-outline-secondary w-100 btn-sm" *ngIf="task.father" routerLink="/task/{{ task.father }}">{{ fatherName }}</a>
+      <a class="btn btn-outline-secondary w-100 btn-sm" *ngIf="task.father" routerLink="/task/{{ task.father }}">
+        {{ fatherName }}
+      </a>
   </div>
   <div class="col-4">
     <div class="float-end">
       <div class="dropdown" ngbDropdown>
-        <button class="btn btn-outline-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton1"
-          data-bs-toggle="dropdown" aria-expanded="false" ngbDropdownToggle>
+        <button class="btn btn-outline-secondary btn-sm dropdown-toggle" 
+          type="button" 
+          id="dropdownMenuButton1"
+          data-bs-toggle="dropdown" 
+          aria-expanded="false" 
+          ngbDropdownToggle>
           Opciones
         </button>
-        <ul class="dropdown-menu" ngbDropdownMenu aria-labelledby="dropdownMenuButton1">
+        <ul class="dropdown-menu" 
+          ngbDropdownMenu 
+          aria-labelledby="dropdownMenuButton1">
           <li><a class="dropdown-item" routerLink="/">Go Home</a></li>
           <li><a class="dropdown-item" (click)="open('e')">Asignar</a></li>
           <li><a class="dropdown-item" (click)="openAvance('e')">Editar Avance</a></li>
           <li><a class="dropdown-item" (click)="delete()">Eliminar tarea</a></li>
-          
         </ul>
       </div>
     </div>

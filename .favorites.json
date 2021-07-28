@@ -1,11 +1,11 @@
 [
     {
         "type": "Directory",
-        "name": "c:\\xampp\\htdocs\\AngularProject\\project1\\src",
+        "name": "c:\\xampp\\htdocs\\AngularProject\\project1\\src\\app",
         "parent_id": null,
-        "fsPath": "c:\\xampp\\htdocs\\AngularProject\\project1\\src",
+        "fsPath": "c:\\xampp\\htdocs\\AngularProject\\project1\\src\\app",
         "workspaceRoot": null,
         "workspacePath": null,
-        "id": "Jx0LqbOFmsAwyUpQ"
+        "id": "YjkC38EoDluHSzBW"
     }
 ]
