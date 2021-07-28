@@ -98,10 +98,10 @@ export class TasksService {
     
     
     let childs = this.filteredIndex(task.id);
-    let childsFamily = task.family.push(task.id);
+    let childsFamily = task.family.push(task.id as never);
     for (var i = 0; i < childs.length; i+=1) {
       childs.forEach(child => {
-        this.adoptar(task.id, child);
+        this.adoptar(task.id as never, child);
       });
     }
     return task; 
