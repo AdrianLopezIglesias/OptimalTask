@@ -11,6 +11,7 @@ import { NgbModule, NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 import { TasksService } from './services/tasks.service';
 import { SliderAvanceStatusComponent } from './card/slider-avance-status/slider-avance-status.component';
 import { ModalEditarAvanceComponent } from './card/modal-editar-avance/modal-editar-avance.component';
+import { SubtareasComponent } from './card/subtareas/subtareas.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { ModalEditarAvanceComponent } from './card/modal-editar-avance/modal-edi
     HomeComponent,
     SliderAvanceStatusComponent,
     ModalEditarAvanceComponent,
+    SubtareasComponent,
   ],
   imports: [
     BrowserModule,

@@ -13,6 +13,7 @@ export class Task {
 }
 
 export class Avance {
+  static types = ['slider', 'progress', 'status'];
   constructor(
     public type = "slider",
     public slider = {

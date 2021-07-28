@@ -8,7 +8,7 @@ import { Task } from '../task';
   styleUrls: ['./slider-avance-status.component.css']
 })
 export class SliderAvanceStatusComponent implements OnInit {
-
+  @Input() task;
 
   constructor() { }
 

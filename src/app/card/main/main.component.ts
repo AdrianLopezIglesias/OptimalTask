@@ -50,8 +50,8 @@ export class MainComponent implements OnInit {
     console.log(form)
   }
 
-  log(task){
-    console.log(task)
+  log(text){
+    console.log(text)
   }
 
   delete(){
@@ -99,7 +99,8 @@ export class MainComponent implements OnInit {
     private modalAvance: ModalEditarAvanceComponent;
 
   openAvance(content) { 
-    this.modalService.open(ModalEditarAvanceComponent)
+    const modal = this.modalService.open(ModalEditarAvanceComponent);
+    modal.componentInstance.texto = "123";
   }
 
 
