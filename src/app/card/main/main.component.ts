@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TasksService } from '../../services/tasks.service';
 import { Task } from '../task';
-import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalEditarAvanceComponent } from '../modal-editar-avance/modal-editar-avance.component';
 
 @Component({
@@ -26,34 +26,13 @@ import { ModalEditarAvanceComponent } from '../modal-editar-avance/modal-editar-
       </div>
       <div class="col-4">
         <div class="float-end">
-          <div class="dropdown" ngbDropdown>
-            <button
-              class="btn btn-outline-secondary btn-sm dropdown-toggle"
-              type="button"
-              id="dropdownMenuButton1"
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
-              ngbDropdownToggle
-            >
-              Opciones
-            </button>
-            <ul
-              class="dropdown-menu"
-              ngbDropdownMenu
-              aria-labelledby="dropdownMenuButton1"
-            >
-              <li><a class="dropdown-item" routerLink="/">Go Home</a></li>
-              <li><a class="dropdown-item" (click)="open('e')">Asignar</a></li>
-              <li>
-                <a class="dropdown-item" (click)="openAvance('e')"
-                  >Editar Avance</a
-                >
-              </li>
-              <li>
-                <a class="dropdown-item" (click)="delete()">Eliminar tarea</a>
-              </li>
-            </ul>
-          </div>
+
+          <app-dropdown
+            (openAvanceX)="openAvance()"
+            (openX)="open(e)"
+            (deleteX)="delete()"
+          ></app-dropdown>
+
         </div>
       </div>
     </div>
@@ -64,7 +43,10 @@ import { ModalEditarAvanceComponent } from '../modal-editar-avance/modal-editar-
       (change)="save()"
     ></card-form>
 
-    <subtareas (change)="newChild($event)" [childs]="childs" [task]="task">
+    <subtareas 
+      (change)="newChild($event)" 
+      [childs]="childs" 
+      [task]="task">
     </subtareas>
   `,
   // templateUrl: './main.component.html',
@@ -132,29 +114,11 @@ export class MainComponent implements OnInit {
   }
 
   open(content) {
-    this.modalService
-      .open(content, { ariaLabelledBy: 'asignarPadre' })
-      .result.then(
-        (result) => {
-          this.closeResult = `Closed with: ${result}`;
-        },
-        (reason) => {
-          this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-        }
-      );
+    this.modalService.open(content, { ariaLabelledBy: 'asignarPadre' })
   }
 
-  private getDismissReason(reason: any): string {
-    if (reason === ModalDismissReasons.ESC) {
-      return 'by pressing ESC';
-    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
-      return 'by clicking on a backdrop';
-    } else {
-      return `with: ${reason}`;
-    }
-  }
 
-  openAvance(content) {
+  openAvance() {
     const modal = this.modalService.open(ModalEditarAvanceComponent);
     modal.componentInstance.task = this.task;
   }

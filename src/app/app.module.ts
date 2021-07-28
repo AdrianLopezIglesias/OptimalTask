@@ -13,6 +13,7 @@ import { TasksService } from './services/tasks.service';
 import { SliderAvanceStatusComponent } from './card/slider-avance-status/slider-avance-status.component';
 import { ModalEditarAvanceComponent } from './card/modal-editar-avance/modal-editar-avance.component';
 import { SubtareasComponent } from './card/subtareas/subtareas.component';
+import { DropdownComponent } from './card/main/dropdown/dropdown.component';
 
 // import { ModalAsignarComponent } from './card/modal-asignar/modal-asignar.component';
 
@@ -26,6 +27,7 @@ import { SubtareasComponent } from './card/subtareas/subtareas.component';
     SubtareasComponent,
     // ModalAsignarComponent,
     FormComponent,
+    DropdownComponent,
   ],
   imports: [
     BrowserModule,
