@@ -4,7 +4,32 @@ import { Avance, Task} from '../task'
 
 @Component({
   selector: 'app-modal-editar-avance',
-  templateUrl: './modal-editar-avance.component.html',
+template: `
+<div class="modal-header">
+  <h4 class="modal-title" id="editarAvance">Editar opciones de Avance</h4>
+  <button type="button" class="close" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <form>
+    <select
+      class="form-select"
+      [(ngModel)]="selectedType"
+      name="selectedType"
+      (change)="log()"
+      aria-label="Default select example"
+    >
+      <option *ngFor="let type of avanceType" value="{{ type }}">
+        {{ type }}
+      </option>
+    </select>
+  </form>
+</div>
+
+`,
+
+  // templateUrl: './modal-editar-avance.component.html',
   styleUrls: ['./modal-editar-avance.component.css']
 })
 export class ModalEditarAvanceComponent implements OnInit {

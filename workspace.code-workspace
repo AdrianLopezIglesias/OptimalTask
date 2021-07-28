@@ -4,5 +4,12 @@
 			"path": "."
 		}
   ],
-  "settings": {}
+  "settings": {
+    "files.exclude": {
+      ".html": true,
+      "**/*.html": true,
+    }
+  },
+    
+  
 }
