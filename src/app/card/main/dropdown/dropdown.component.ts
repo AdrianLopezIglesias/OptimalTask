@@ -20,7 +20,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
       aria-labelledby="dropdownMenuButton1"
     >
       <li><a class="dropdown-item" routerLink="/">Go Home</a></li>
-      <li><a class="dropdown-item" (click)="open('e')">Asignar</a></li>
+      <li><a class="dropdown-item" (click)="open()">Asignar</a></li>
       <li>
         <a class="dropdown-item" (click)="openAvance()"
           >Editar Avance</a
@@ -51,8 +51,8 @@ export class DropdownComponent implements OnInit {
   open(){
     this.openX.emit();
   }
-  openAvance(e){
-    this.openAvanceX.emit(e);
+  openAvance(){
+    this.openAvanceX.emit();
   }
   delete(){
     this.deleteX.emit();

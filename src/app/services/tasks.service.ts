@@ -80,6 +80,19 @@ export class TasksService {
     this.tasks = this.index();
     const taskIndex = this.tasks.findIndex(t => t.id == id );
     this.tasks.splice(taskIndex, 1);
+
+    const childs = this.tasks.filter(x => x.family.includes(id));
+
+    childs.forEach(child => {
+
+      const taskIndex = this.tasks.findIndex(t => t.id == child.id );
+      console.log("child id = "+child.id);
+      console.log("child name = "+child.name);
+      this.tasks.splice(taskIndex, 1);
+
+    });
+
+
     localStorage.setItem('tasks', JSON.stringify(this.tasks));
   }
 

@@ -12,10 +12,11 @@ import { NgbModule, NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 import { TasksService } from './services/tasks.service';
 import { SliderAvanceStatusComponent } from './card/slider-avance-status/slider-avance-status.component';
 import { ModalEditarAvanceComponent } from './card/modal-editar-avance/modal-editar-avance.component';
+import {ModalAsignarComponent} from './card/modal-asignar/modal-asignar.component'
 import { SubtareasComponent } from './card/subtareas/subtareas.component';
 import { DropdownComponent } from './card/main/dropdown/dropdown.component';
+import { CardFormAvanceMainComponent } from './card/main/form/avance/main.component';
 
-// import { ModalAsignarComponent } from './card/modal-asignar/modal-asignar.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { DropdownComponent } from './card/main/dropdown/dropdown.component';
     SliderAvanceStatusComponent,
     ModalEditarAvanceComponent,
     SubtareasComponent,
-    // ModalAsignarComponent,
+    ModalAsignarComponent,
+    CardFormAvanceMainComponent,
     FormComponent,
     DropdownComponent,
   ],
@@ -41,7 +43,8 @@ import { DropdownComponent } from './card/main/dropdown/dropdown.component';
     TasksService
   ],
   entryComponents: [
-    ModalEditarAvanceComponent
+    ModalEditarAvanceComponent,
+    ModalAsignarComponent
   ],
   bootstrap: [AppComponent]
 })

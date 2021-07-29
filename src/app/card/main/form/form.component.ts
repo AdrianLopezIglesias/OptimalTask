@@ -27,22 +27,15 @@ import { Task } from '../../task';
       {{ task.description }}
     </textarea>
 
-    <label 
-      for="customRange2" 
-      class="form-label">
-      Avance 
-      ({{ task.avance.slider.currentValue }}/{{ task.avance.slider.maxValue }})
-    </label>
 
-    <input 
-      type="range" 
-      class="form-range" 
-      min="0" 
-      max="{{ task.avance.slider.maxValue }}" id="customRange2" 
-      (change)="save(task.id)" 
-      [(ngModel)]="task.avance.slider.currentValue" 
-      name="avance" 
-      value="{{ task.avance.slider.currentValue }}">
+
+
+    <card-form-avance-main
+      [task]="task"
+    
+    ></card-form-avance-main>
+
+
       
   </form>
   `,

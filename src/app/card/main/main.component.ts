@@ -4,6 +4,7 @@ import { TasksService } from '../../services/tasks.service';
 import { Task } from '../task';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalEditarAvanceComponent } from '../modal-editar-avance/modal-editar-avance.component';
+import { ModalAsignarComponent } from '../modal-asignar/modal-asignar.component';
 
 @Component({
   selector: 'card-main',
@@ -29,7 +30,7 @@ import { ModalEditarAvanceComponent } from '../modal-editar-avance/modal-editar-
 
           <app-dropdown
             (openAvanceX)="openAvance()"
-            (openX)="open(e)"
+            (openX)="open()"
             (deleteX)="delete()"
           ></app-dropdown>
 
@@ -57,7 +58,8 @@ export class MainComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private t: TasksService,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+
   ) {}
 
   closeResult = '';
@@ -79,6 +81,12 @@ export class MainComponent implements OnInit {
       }
       this.posibleParents = this.t.posibleParentsIndex(this.task.id);
     });
+  }
+
+  ngDoCheck(): void {
+      if (this.task.father) {
+        this.fatherName = this.t.findByFather(this.task.father).name;
+      }
   }
 
   save() {
@@ -105,16 +113,18 @@ export class MainComponent implements OnInit {
     this.router.navigate(['/task/' + newTask.id]);
   }
 
-  asignar(id: never) {
-    this.task = this.t.adoptar(id, this.task);
-    this.modalService.dismissAll();
-    console.log(this.task);
-    this.fatherName = this.t.findByFather(this.task.father).name;
-    return this.router.navigate(['/task/' + this.task.id]);
-  }
+  // asignar(id: never) {
+  //   this.task = this.t.adoptar(id, this.task);
+  //   this.modalService.dismissAll();
+  //   console.log(this.task);
+  //   this.fatherName = this.t.findByFather(this.task.father).name;
+  //   return this.router.navigate(['/task/' + this.task.id]);
+  // }
 
-  open(content) {
-    this.modalService.open(content, { ariaLabelledBy: 'asignarPadre' })
+  open() {
+    let modal = this.modalService.open(ModalAsignarComponent);
+    modal.componentInstance.task = this.task;
+    modal.componentInstance.posibleParents = this.posibleParents;
   }
 
 

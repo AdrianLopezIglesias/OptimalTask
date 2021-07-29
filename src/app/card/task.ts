@@ -13,7 +13,8 @@ export class Task {
 }
 
 export class Avance {
-  static types = ['slider', 'progress', 'status'];
+  static types = ['slider', 'status'];
+  static possibleStatus = ['Sin comenzar', 'En progreso', 'Terminada'];
   constructor(
     public type = "slider",
     public slider = {
@@ -26,8 +27,7 @@ export class Avance {
     maxValue: 100,
 },
     public status = {
-    currentStatus: "",
-    possibleStatus: ['Sin comenzar', 'En progreso', 'Terminada']
+    currentStatus: ""
 }
   ) {
     }
